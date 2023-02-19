@@ -1,14 +1,13 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+mod tests;
+mod structs;
+mod r#impl;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+use {
+    structs::{Talkative}
+};
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[no_mangle]
+pub unsafe extern "C" fn add_GlobalContext(instance:*mut Talkative ,context:&str) {
+    let talkative_instance = &mut *instance;
+    talkative_instance.add_GlobalContext(context);
 }
